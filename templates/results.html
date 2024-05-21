@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/assets/main.css">
+    <title>Groupie-Tracker</title>
+</head>
+
+<body>
+    <header>
+        <a href="/">
+            <h1>Groupie-Tracker</h1>
+        </a>
+    </header>
+
+    <div style="padding-left:40px;padding-top:10px;padding-bottom:20px;border-color:coral;border-style:solid;">
+        <h2>Search for an artist:</h2>
+
+        <form action="/results">
+            <div class="autocomplete" id="search" style="margin-bottom:15px">
+                <input type="text" id="search-bar" name="q" size="35" required>
+            </div>
+
+            <input type="submit" value="Search">
+        </form>
+    </div>
+
+    <div class="correct">
+        <div class="Artists">
+            {{if .Artists}}
+            {{range $artist := .Artists}}
+            <div class="card">
+                <a href="/artists?id={{$artist.ID}}">
+                    <br>
+                    <h2 class="card-title" align="center">{{$artist.Name}}</h2>
+                    <br>
+                    <img src="{{$artist.Image}}" alt="{{$artist.Name}}">
+                </a>
+            </div>
+            {{end}}
+            {{else}}
+            <h2>Unfortunately, no results</h2>
+            {{end}}
+        </div>
+    </div>
+
+    <script src="/assets/search.js"></script>
+</body>
+
+</html>

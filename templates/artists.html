@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/artists.css">
+    <title>{{.Name}} | Groupie-Tracker</title>
+</head>
+<header>
+    <a href="/" class="home">Home</a>
+</header>
+
+<body>
+    <div class="band-card">
+        <div class="correct">
+            <div class="imgWithInf">
+                <h1 class="band-name">{{.Name}}</h1>
+                <div class="image">
+                    <img class="image_band" src="{{.Image}}" alt="{{.Name}}">
+                </div>
+
+                <div class="info">
+                    <h4 class="creation_date">Creation Date:</h4>
+                    <div class="creation_date">{{.CreationDate}}</div>
+                    <br>
+                    <h4 class="firstAlbum">First Album:</h4>
+                    <div class="firstAlbum">
+                        {{.FirstAlbum}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="members">
+                <br>
+                <h4 class="band-members">Members:</h4>
+                <br>
+
+                {{range .Members}}
+                <li>{{.}}</li>
+                {{end}}
+            </div>
+
+            <div class="date-location">
+                <br>
+                <h4>Location and Date:</h4>
+                <br>
+                <table>
+                    {{range $key, $value := .Relations.DatesLocations}}
+                    <tr>
+                        <td class="left">{{$key}}:</td>
+                        <td class="right">
+                            {{range $value}}
+                            {{.}}<br>
+                            {{end}}
+                        </td>
+                    </tr>
+                    {{end}}
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
