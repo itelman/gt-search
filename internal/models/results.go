@@ -37,7 +37,9 @@ func SetResults(query string) ([]Result, error) {
 }
 
 func (a *Artist) Search(query string) (string, string) {
-	if strings.Contains(a.Name, query) {
+	query = strings.ToLower(query)
+
+	if strings.Contains(strings.ToLower(a.Name), query) {
 		return a.Name, "artist"
 	}
 
@@ -53,7 +55,7 @@ func (a *Artist) Search(query string) (string, string) {
 	}
 
 	for _, member := range a.Members {
-		if strings.Contains(member, query) {
+		if strings.Contains(strings.ToLower(member), query) {
 			return member, "member"
 		}
 	}
@@ -74,12 +76,7 @@ func (a *Artist) Search(query string) (string, string) {
 }
 
 func IsNonWord(query string) bool {
-	spaces := regexp.MustCompile(`^[\s\W_]+`)
-	regex1 := regexp.MustCompile(`^(-(\w+))`)
+	regex := regexp.MustCompile(`(\W|\s){2,}`)
 
-	if regex1.MatchString(query) && !spaces.MatchString(query) {
-		return false
-	}
-
-	return spaces.MatchString(query)
+	return regex.MatchString(query)
 }

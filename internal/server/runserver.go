@@ -11,6 +11,7 @@ func RunServer() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handler.IndexHandler)
 	mux.HandleFunc("/results", handler.ResultsHandler)
+	mux.HandleFunc("/results/json", handler.JsonHandler)
 	mux.HandleFunc("/artists", handler.ArtistHandler)
 	mux.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 

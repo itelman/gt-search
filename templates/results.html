@@ -24,20 +24,20 @@
                 <input type="text" id="search-bar" name="q" size="35" required>
             </div>
 
-            <input type="submit" value="Search">
+            <input type="submit" value="Search" style="margin-left:20px;">
         </form>
     </div>
 
     <div class="correct">
         <div class="Artists">
-            {{if .Artists}}
-            {{range $artist := .Artists}}
+            {{if .}}
+            {{range $result := .}}
             <div class="card">
-                <a href="/artists?id={{$artist.ID}}">
+                <a href="/artists?id={{$result.Artist.ID}}">
                     <br>
-                    <h2 class="card-title" align="center">{{$artist.Name}}</h2>
+                    <h2 class="card-title" align="center">{{$result.Artist.Name}}</h2>
                     <br>
-                    <img src="{{$artist.Image}}" alt="{{$artist.Name}}">
+                    <img src="{{$result.Artist.Image}}" alt="{{$result.Artist.Name}}">
                 </a>
             </div>
             {{end}}
