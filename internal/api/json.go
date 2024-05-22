@@ -30,3 +30,17 @@ func ParseJsonFile(dir string) ([]byte, error) {
 
 	return content, nil
 }
+
+func WriteJsonFile(url, dir string) error {
+	body, err := ParseJson(url)
+	if err != nil {
+		return err
+	}
+
+	err = ioutil.WriteFile(dir, body, 0644)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

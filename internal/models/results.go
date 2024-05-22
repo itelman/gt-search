@@ -85,6 +85,10 @@ func (a *Artist) Search(query string) (string, string) {
 func GetLocs(id int) ([]string, error) {
 	var index Index
 
+	/*if err := api.WriteJsonFile("https://groupietrackers.herokuapp.com/api/locations", "assets/locations.json"); err != nil {
+		return nil, err
+	}*/
+
 	body, err := api.ParseJsonFile("assets/locations.json")
 	if err != nil {
 		return nil, err
