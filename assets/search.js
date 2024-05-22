@@ -27,7 +27,6 @@ function autocomplete(inp) {
         for (var i = 0; i < data.length; i++) {
           /*create a DIV element for each matching element:*/
           b = document.createElement("DIV");
-          /*make the matching letters bold:*/
           b.innerHTML =
             data[i].Artist.name +
             " - " +

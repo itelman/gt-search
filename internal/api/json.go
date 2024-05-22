@@ -21,3 +21,12 @@ func ParseJson(url string) ([]byte, error) {
 
 	return body, nil
 }
+
+func ParseJsonFile(dir string) ([]byte, error) {
+	content, err := ioutil.ReadFile(dir)
+	if err != nil {
+		return nil, err
+	}
+
+	return content, nil
+}

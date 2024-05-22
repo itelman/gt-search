@@ -1,6 +1,8 @@
 package models
 
 import (
+	"encoding/json"
+	"functions/internal/api"
 	"regexp"
 	"strconv"
 	"strings"
@@ -10,6 +12,10 @@ type Result struct {
 	Response string
 	Keyword  string
 	Artist   *Artist
+}
+
+type Index struct {
+	Index []Locations
 }
 
 func SetResults(query string) ([]Result, error) {
@@ -54,29 +60,45 @@ func (a *Artist) Search(query string) (string, string) {
 		return creationdate, "creation date"
 	}
 
-	/*for _, member := range a.Members {
+	for _, member := range a.Members {
 		if strings.Contains(strings.ToLower(member), query) {
 			return member, "member"
 		}
 	}
 
 	if query != "-" {
-		artlocs, err := a.GetArtistLocations()
+		artlocs, err := GetLocs(a.ID)
 		if err != nil {
 			return "", "none"
 		}
-		for _, location := range artlocs.Locations {
+
+		for _, location := range artlocs {
 			if strings.Contains(location, query) {
 				return location, "location"
 			}
 		}
-	}*/
+	}
 
 	return "", "none"
+}
+
+func GetLocs(id int) ([]string, error) {
+	var index Index
+
+	body, err := api.ParseJsonFile("assets/locations.json")
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(body, &index); err != nil {
+		return nil, err
+	}
+
+	return index.Index[id-1].Locations, nil
 }
 
 func IsNonWord(query string) bool {
 	regex := regexp.MustCompile(`(\W|\s){2,}`)
 
-	return regex.MatchString(query)
+	return regex.MatchString(query) || query == " "
 }
