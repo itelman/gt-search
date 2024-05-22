@@ -54,7 +54,7 @@ func (a *Artist) Search(query string) (string, string) {
 		return creationdate, "creation date"
 	}
 
-	for _, member := range a.Members {
+	/*for _, member := range a.Members {
 		if strings.Contains(strings.ToLower(member), query) {
 			return member, "member"
 		}
@@ -70,7 +70,7 @@ func (a *Artist) Search(query string) (string, string) {
 				return location, "location"
 			}
 		}
-	}
+	}*/
 
 	return "", "none"
 }
